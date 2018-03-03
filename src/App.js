@@ -1,37 +1,21 @@
 import React, { Component } from 'react';
 
-import './App.css';
+
+import {connect} from 'react-redux';
 
 
-import { createStore} from 'redux';
-
-//inital state
-const initalState = 0;
-//reducer how state changes
-const countReducer = (state= initalState, action) => {
-  switch(action.type){
-    case "INCREMENT":
-    return state + 1;
-  case "DECREMENT":
-   state - 1;
-  default:
-  return state 
-  }
-};
-//create of the store
-const store =createStore(countReducer,
-window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
 
 
 
 class App extends Component {
   render() {
+    console.log(this);
     return (
       <div>
-        <h1>{store.getState( )}</h1>
-        <button onClick={() => store.dispatch({type: 'INCREMENT'})}>+</button>
-        <button onClick={() => store.dispatch({type: 'DECREMENT'})}>-</button>
+        <h1>{this.props.count}</h1>
+        <button onClick={() => {this.props.dispatch({type: 'INCREMENT'})}}>+</button>
+        <button onClick={() => {this.props.dispatch({type: 'DECREMENT'})}}>-</button>
+        
         
       </div>
 
@@ -39,4 +23,9 @@ class App extends Component {
   
   } 
 }
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    count: state
+  }
+}
+export default connect(mapStateToProps, null)(App);
