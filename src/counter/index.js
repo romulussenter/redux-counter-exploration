@@ -1,16 +1,35 @@
-import * as types from './types';
+import * as types from "./types";
 
 //inital state
-const initalState = 0;
+const initalState = {
+  count: 0
+};
 //reducer how state changes
-const countReducer = (state= initalState, action) => {
-  switch(action.type){
+const countReducer = (state = initalState, action) => {
+  switch (action.type) {
     case types.INCREMENT:
-    return state + 1;
-  case types.DECREMENT:
-   return state - 1;
-  default:
-  return state 
+      return {
+        ...state,
+        count: state.count + 1
+      };
+    case types.DECREMENT:
+      return {
+        ...state,
+        count: state.count - 1
+      };
+    case types.DECREMENT_BY:
+      return {
+        ...state,
+        count: state.count - action.payload.value
+      };
+
+    case types.INCREMENT_BY:
+      return {
+        ...state,
+        count: state.count + action.payload.value
+      };
+    default:
+      return state;
   }
 };
 
