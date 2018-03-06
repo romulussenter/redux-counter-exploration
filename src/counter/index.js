@@ -18,6 +18,7 @@ const countReducer = (state = initalState, action) => {
         ...state,
         count: state.count + action.payload.value
       };
+     
     default:
       return state;
   }
